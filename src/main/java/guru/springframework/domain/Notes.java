@@ -1,10 +1,15 @@
 package guru.springframework.domain;
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
+/**
+ * Created by jt on 6/13/17.
+ */
 @Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {
 
@@ -18,6 +23,4 @@ public class Notes {
     @Lob
     private String recipeNotes;
 
-    public Notes() {
-    }
 }
