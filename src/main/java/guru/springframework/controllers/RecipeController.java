@@ -6,8 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.jws.WebParam;
-
+/**
+ * Created by jt on 6/19/17.
+ */
 @Controller
 public class RecipeController {
 
@@ -18,11 +19,10 @@ public class RecipeController {
     }
 
     @RequestMapping("/recipe/show/{id}")
-    public String showById(@PathVariable String id, Model model) {
+    public String showById(@PathVariable String id, Model model){
 
         model.addAttribute("recipe", recipeService.findById(new Long(id)));
 
         return "recipe/show";
-
     }
 }
