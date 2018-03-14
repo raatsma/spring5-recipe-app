@@ -1,4 +1,3 @@
-
 package guru.springframework.exceptions;
 
 import org.springframework.http.HttpStatus;

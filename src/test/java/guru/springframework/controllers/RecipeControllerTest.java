@@ -37,7 +37,7 @@ public class RecipeControllerTest {
 
         controller = new RecipeController(recipeService);
         mockMvc = MockMvcBuilders.standaloneSetup(controller)
-                .setControllerAdvice((new ControllerExceptionHandler()))
+                .setControllerAdvice(new ControllerExceptionHandler())
                 .build();
     }
 
@@ -55,6 +55,7 @@ public class RecipeControllerTest {
                 .andExpect(model().attributeExists("recipe"));
     }
 
+    @Test
     public void testGetRecipeNotFound() throws Exception {
 
         when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
@@ -64,9 +65,8 @@ public class RecipeControllerTest {
                 .andExpect(view().name("404error"));
     }
 
+    @Test
     public void testGetRecipeNumberFormatException() throws Exception {
-
-        //when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
 
         mockMvc.perform(get("/recipe/asdf/show"))
                 .andExpect(status().isBadRequest())
@@ -94,7 +94,7 @@ public class RecipeControllerTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", "")
                 .param("description", "some string")
-                .param("directions","some directions")
+                .param("directions", "some directions")
         )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/recipe/2/show"));
@@ -111,11 +111,11 @@ public class RecipeControllerTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", "")
                 .param("cookTime", "3000")
+
         )
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("recipe"))
                 .andExpect(view().name("recipe/recipeform"));
-
     }
 
     @Test

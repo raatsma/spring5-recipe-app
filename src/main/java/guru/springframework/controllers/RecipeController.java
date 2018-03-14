@@ -45,7 +45,7 @@ public class RecipeController {
     @GetMapping("recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model){
         model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
-        return  "recipe/recipeform";
+        return RECIPE_RECIPEFORM_URL;
     }
 
     @PostMapping("recipe")
@@ -76,7 +76,7 @@ public class RecipeController {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
-    public ModelAndView handleNotFound(Exception exception) {
+    public ModelAndView handleNotFound(Exception exception){
 
         log.error("Handling not found exception");
         log.error(exception.getMessage());
@@ -88,4 +88,5 @@ public class RecipeController {
 
         return modelAndView;
     }
+
 }
